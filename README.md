@@ -21,6 +21,7 @@
   a command-line application that accepts user input
 
   start the application
+  
   THEN presented with the following options: 
   - view all departments
   - view all roles
@@ -31,11 +32,13 @@
   - and update an employee role
 
   choosing to view all departments
+  
   THEN presented with a formatted table showing :
   - department names
   - department ids
 
   choosing to view all roles
+  
   THEN presented with :
   - the job title
   - role id
@@ -43,6 +46,7 @@
   - the salary for that role
 
   choosing to view all employees
+  
   THEN presented with a formatted table showing :
   - employee data
   - employee ids
@@ -54,15 +58,19 @@
   - managers that the employees report to
 
   choosing to add a department
-  THEN prompted to enter the name of the department & that department is added to the database
+  
+  THEN prompted to enter the name of the department 
+  & that department is added to the database
 
   choosing to add a role
+  
   THEN prompted to :
   - enter the name
   - salary
   - department for the role & that role is added to the database
 
   choosing to add an employee
+  
   THEN prompted to enter :
   - the employee’s first name
   - last name
@@ -71,8 +79,10 @@
   & that employee is added to the database
 
   choosing to update an employee role
+  
   THEN prompted to select :
-  an employee to update their new role & this information is updated in the database
+  an employee to update their new role 
+  & this information is updated in the database
 
   ## Video Demonstration
 
