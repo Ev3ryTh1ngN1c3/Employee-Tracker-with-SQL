@@ -6,7 +6,7 @@
 
   * [Description](#description)
   * [Usage](#usage)
-  * [Video Demonstration](#video demonstration)
+  * [Video Demonstration](#video-demonstration)
   * [Project Motivation](#project-motivation)
   * [What Was Learned](#what-was-learned)
   * [Acknowledgments](#acknowledgments)
