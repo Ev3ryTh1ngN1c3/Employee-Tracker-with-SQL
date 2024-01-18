@@ -59,7 +59,9 @@
 
   WHEN choosing to add a department
   
-  THEN prompted to enter the name of the department 
+  THEN prompted to :
+  
+  enter the name of the department 
   & that department is added to the database
 
   WHEN choosing to add a role
@@ -81,6 +83,7 @@
   WHEN choosing to update an employee role
   
   THEN prompted to select :
+
   an employee to update their new role 
   & this information is updated in the database
 
