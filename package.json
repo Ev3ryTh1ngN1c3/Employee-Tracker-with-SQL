@@ -1,0 +1,28 @@
+{
+  "name": "employee-tracker-with-sql",
+  "version": "1.0.0",
+  "description": "a command-line application to manage a company's employee database, using Node.js, Inquirer & MySQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "(jest) npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Ev3ryTh1ngN1c3/Employee-Tracker-with-SQL.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Inquirer",
+    "&",
+    "MySQL"
+  ],
+  "author": "Lisa Brongo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ev3ryTh1ngN1c3/Employee-Tracker-with-SQL/issues"
+  },
+  "homepage": "https://github.com/Ev3ryTh1ngN1c3/Employee-Tracker-with-SQL#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
