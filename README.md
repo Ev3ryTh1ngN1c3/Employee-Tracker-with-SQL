@@ -28,7 +28,7 @@
 
   ZacharyBinx : https://github.com/ZacharyBinx
 
-  and UCF Tutor : 
+  and UCF Coding BootCamp Tutor : 
 
   ## Questions
   
