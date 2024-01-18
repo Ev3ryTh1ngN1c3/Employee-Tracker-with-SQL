@@ -22,7 +22,7 @@
 
   WHEN starting the application
   
-  THEN presented with the following options: 
+  THEN presented with the following options : 
   - view all departments
   - view all roles
   - view all employees
