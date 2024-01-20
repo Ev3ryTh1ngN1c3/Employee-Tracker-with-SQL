@@ -91,6 +91,10 @@
 
   ## Project Motivation
 
+  for business owners
+  to be able to view & manage departments, roles & employees in the company
+  this project helps organize & plan a business
+
   ## What Was Learned
 
   ## Acknowledgements
