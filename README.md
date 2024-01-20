@@ -20,8 +20,7 @@
 
   a command-line application that accepts user input
 
-  WHEN starting the application
-  
+  WHEN starting the application <br>
   THEN presented with the following options : 
   - view all departments
   - view all roles
@@ -31,22 +30,19 @@
   - add an employee
   - and update an employee role
 
-  WHEN choosing to view all departments
-  
+  WHEN choosing to view all departments <br>
   THEN presented with a formatted table showing :
   - department names
   - department ids
 
-  WHEN choosing to view all roles
-  
+  WHEN choosing to view all roles <br>
   THEN presented with :
   - the job title
   - role id
   - the department that role belongs to
   - the salary for that role
 
-  WHEN choosing to view all employees
-  
+  WHEN choosing to view all employees <br>
   THEN presented with a formatted table showing :
   - employee data
   - employee ids
@@ -57,22 +53,18 @@
   - salaries
   - managers that the employees report to
 
-  WHEN choosing to add a department
-  
-  THEN prompted to :
-  
+  WHEN choosing to add a department <br>
+  THEN prompted to : <br>
   enter the name of the department 
   & that department is added to the database
 
-  WHEN choosing to add a role
-  
+  WHEN choosing to add a role <br>
   THEN prompted to :
   - enter the name
   - salary
   - department for the role & that role is added to the database
 
-  WHEN choosing to add an employee
-  
+  WHEN choosing to add an employee <br>
   THEN prompted to enter :
   - the employee’s first name
   - last name
@@ -80,10 +72,8 @@
   - manager
   & that employee is added to the database
 
-  WHEN choosing to update an employee role
-  
-  THEN prompted to select :
-
+  WHEN choosing to update an employee role <br>
+  THEN prompted to select : <br>
   an employee to update their new role 
   & this information is updated in the database
 
@@ -91,9 +81,9 @@
 
   ## Project Motivation
 
-  for business owners
-  to be able to view & manage departments, roles & employees in the company
-  this project helps organize & plan a business
+  for business owners <br>
+  to be able to view & manage departments, roles & employees in the company <br>
+  this project helps organize & plan a business <br>
 
   ## What Was Learned
 
