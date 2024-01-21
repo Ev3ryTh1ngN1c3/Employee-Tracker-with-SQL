@@ -349,3 +349,58 @@ function viewEmployeesByDepartment() {
         start();
     });
 }
+
+// DELETE department, role or employee
+function deleteDepartmentsRolesEmployees() {
+    inquirer
+        .prompt({
+            type: "list",
+            name: "data",
+            message: "select which to delete",
+            choices: ["employee", "role", "department"],
+        })
+        .then((answer) => {
+            switch (answer.data) {
+                case "employee":
+                    deleteEmployee();
+                    break;
+                case "role":
+                    deleteRole();
+                    break;
+                case "department":
+                    deleteDepartment();
+                    break;
+                default:
+                    console.log(`Invalid data: ${answer.data}`);
+                    start();
+                    break;
+            }
+        });
+}
+
+// remove employee 
+async function removeEmployee() {
+    connection.query(
+        "SELECT first_name AS firstName, last_name AS lastName FROM employee",
+        async function (err, employees) {
+            const data = await inquirer.prompt([
+                {
+                    name: "employees",
+                    message: "select employee to remove?",
+                    type: "list",
+                    choices: employees.map((employee) => ({
+                        name: employee.firstName + " " + employee.lastName,
+                    })),
+                },
+            ]);
+            console.log(data);
+            const firstAndLast = data.employees.split(" ");
+            console.log(firstAndLast[1]);
+            connection.query(
+                "DELETE employee WHERE first_name = ? AND last_name = ?",
+                [firstAndLast[0], firstAndLast[1]]
+            );
+            init();
+        }
+    );
+}
