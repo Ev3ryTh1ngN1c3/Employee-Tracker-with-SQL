@@ -118,7 +118,7 @@ async function start() {
             break;
     }
 }
-// Edit department functions
+// edit department functions
 async function editDepartments() {
     const { department } = await inquirer.prompt({
         name: "department",
@@ -250,4 +250,102 @@ async function addRole() {
             init();
         }
     );
+}
+// edit role
+async function updateRole() {
+    const employees = await connection.query(
+        "SELECT first_name AS firstName, last_name AS lastName, id FROM employee"
+    );
+    const roles = await connection.query("SELECT id, title, salary FROM role");
+    const { employee, role } = await inquirer.prompt([
+        {
+            name: "employee",
+            type: "list",
+            message: "Select an employee to update:",
+            choices: employees.map((employee) => ({
+                name: employee.firstName + " " + employee.lastName,
+                value: employee.id,
+            })),
+        },
+        {
+            name: "role",
+            type: "list",
+            message: "Select the new role:",
+            choices: roles.map((row) => ({ name: row.title, value: row.id })),
+        },
+    ]);
+    connection.query(
+        `UPDATE employee SET role_id = ${role} WHERE  id = ${employee}`,
+        function (err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + " Role Added\n");
+            init();
+        }
+    );
+}
+
+// update employee role
+function updateEmployeeRole() {
+    const queryEmployees =
+        "SELECT employee.id, employee.first_name, employee.last_name, roles.title FROM employee LEFT JOIN roles ON employee.role_id = roles.id";
+    const queryRoles = "SELECT * FROM roles";
+    connection.query(queryEmployees, (err, resEmployees) => {
+        if (err) throw err;
+        connection.query(queryRoles, (err, resRoles) => {
+            if (err) throw err;
+            inquirer
+                .prompt([
+                    {
+                        type: "list",
+                        name: "employee",
+                        message: "Select the employee to update:",
+                        choices: resEmployees.map(
+                            (employee) =>
+                                `${employee.first_name} ${employee.last_name}`
+                        ),
+                    },
+                    {
+                        type: "list",
+                        name: "role",
+                        message: "Select the new role:",
+                        choices: resRoles.map((role) => role.title),
+                    },
+                ])
+                .then((answers) => {
+                    const employee = resEmployees.find(
+                        (employee) =>
+                            `${employee.first_name} ${employee.last_name}` ===
+                            answers.employee
+                    );
+                    const role = resRoles.find(
+                        (role) => role.title === answers.role
+                    );
+                    const query =
+                        "UPDATE employee SET role_id = ? WHERE id = ?";
+                    connection.query(
+                        query,
+                        [role.id, employee.id],
+                        (err, res) => {
+                            if (err) throw err;
+                            console.log(
+                                `Updated ${employee.first_name} ${employee.last_name}'s role to ${role.title} in the database!`
+                            );
+                            start();
+                        }
+                    );
+                });
+        });
+    });
+}
+
+// eployees by department
+function viewEmployeesByDepartment() {
+    const query =
+        "SELECT departments.department_name, employee.first_name, employee.last_name FROM employee INNER JOIN roles ON employee.role_id = roles.id INNER JOIN departments ON roles.department_id = departments.id ORDER BY departments.department_name ASC";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.log("\nEmployees by department:");
+        console.table(res);
+        start();
+    });
 }
