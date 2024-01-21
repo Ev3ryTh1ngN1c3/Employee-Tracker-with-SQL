@@ -14,11 +14,11 @@ const connection = mysql.createConnection({
 // connect to the MySQL server
 connection.connect((err) => {
     if (err) {
-      console.error('error connecting to the database: ', err);
-      return;
+        console.error('error connecting to the database: ', err);
+        return;
     }
     console.log('connected to the database');
-  });
+});
 
 
 // start application
@@ -74,40 +74,40 @@ async function start() {
 
     switch (action) {
         case "view all departments":
-            // code for viewing all departments
+
             break;
         case "view all roles":
-            // code for viewing all roles
+
             break;
         case "view all employees":
-            // code for viewing all employees
+
             break;
         case "add a department":
-            // code for adding a department
+
             break;
         case "add a role":
-            // code for adding a role
+
             break;
         case "add an employee":
-            // code for adding an employee
+
             break;
         case "add a manager":
-            // code for adding a manager
+
             break;
         case "update an employee role":
-            // code for updating an employee role
+
             break;
         case "view employees by manager":
-            // code for viewing employees by manager
+
             break;
         case "view employees by department":
-            // code for viewing employees by department
+
             break;
         case "delete departments | roles | employees":
-            // code for deleting departments, roles, or employees
+
             break;
         case "view the total utilized budget of a department":
-            // code for viewing the total utilized budget of a department
+
             break;
         case "exit":
             process.exit(0);
@@ -259,7 +259,7 @@ async function updateRole() {
         {
             name: "employee",
             type: "list",
-            message: "Select an employee to update:",
+            message: "choose employee to update:",
             choices: employees.map((employee) => ({
                 name: employee.firstName + " " + employee.lastName,
                 value: employee.id,
@@ -268,7 +268,7 @@ async function updateRole() {
         {
             name: "role",
             type: "list",
-            message: "Select the new role:",
+            message: "choose new role:",
             choices: roles.map((row) => ({ name: row.title, value: row.id })),
         },
     ]);
@@ -418,7 +418,7 @@ function viewTotalUtilizedBudgetOfDepartment() {
             .prompt({
                 type: "list",
                 name: "departmentId",
-                message: "Which department do you want to calculate the total salary for?",
+                message: "choose department to calculate the budget?",
                 choices: departmentChoices,
             })
             .then((answer) => {
@@ -439,7 +439,7 @@ function viewTotalUtilizedBudgetOfDepartment() {
                 connection.query(query, [answer.departmentId], (err, res) => {
                     if (err) throw err;
                     const totalSalary = res[0].total_salary;
-                    console.log(`The total salary for employees in this department is $${totalSalary}`);
+                    console.log(`total salary for employees in this department $${totalSalary}`);
                     // restart the application
                     start();
                 });
