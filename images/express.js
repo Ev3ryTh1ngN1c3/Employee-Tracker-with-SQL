@@ -23,64 +23,64 @@ function start() {
         .prompt({
             type: "list",
             name: "action",
-            message: "What would you like to do?",
+            message: "manage your employee database",
             choices: [
-                "View all departments",
-                "View all roles",
-                "View all employees",
-                "Add a department",
-                "Add a role",
-                "Add an employee",
-                "Add a Manager",
-                "Update an employee role",
-                "View Employees by Manager",
-                "View Employees by Department",
-                "Delete Departments | Roles | Employees",
-                "View the total utilized budget of a department",
-                "Exit",
+                "select department",
+                "select role",
+                "select employee",
+                "add a department",
+                "add a role",
+                "add an employee",
+                "add a manager",
+                "update an employee role",
+                "select employees by manager",
+                "select employees by department",
+                "select department | role | employee",
+                "select the combined salaries in every department",
+                "exit",
             ],
         })
         .then((answer) => {
             switch (answer.action) {
-                case "View all departments":
+                case "select department":
                     viewAllDepartments();
                     break;
-                case "View all roles":
+                case "select role":
                     viewAllRoles();
                     break;
-                case "View all employees":
+                case "select employee":
                     viewAllEmployees();
                     break;
-                case "Add a department":
+                case "add a department":
                     addDepartment();
                     break;
-                case "Add a role":
+                case "add a role":
                     addRole();
                     break;
-                case "Add an employee":
+                case "add an employee":
                     addEmployee();
                     break;
-                case "Add a Manager":
+                case "add a managerr":
                     addManager();
                     break;
-                case "Update an employee role":
+                case "update an employee role":
                     updateEmployeeRole();
                     break;
-                case "View Employees by Manager":
+                case "select employees by manager":
                     viewEmployeesByManager();
                     break;
-                case "View Employees by Department":
+                case "select employees by department":
                     viewEmployeesByDepartment();
                     break;
-                case "Delete Departments | Roles | Employees":
+                case "select department | role | employee":
                     deleteDepartmentsRolesEmployees();
                     break;
-                case "View the total utilized budget of a department":
+                case "select the combined salaries in every departmentt":
                     viewTotalUtilizedBudgetOfDepartment();
                     break;
-                case "Exit":
+                case "exit":
                     connection.end();
-                    console.log("Goodbye!");
+                    console.log("goodbye!");
                     break;
             }
         });
