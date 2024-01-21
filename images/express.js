@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
     database: "employeeTracker_db",
 });
 
-// start application
+// Start application
 init();
 
 async function init() {
@@ -36,18 +36,6 @@ async function init() {
             break;
     }
 }
-const inquirer = require("inquirer");
-const mysql = require("mysql2");
-const questions = require("./assets/js/questions");
-
-// create a MySQL connection
-const connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "ch0sen",
-    database: "employeeTracker_db",
-});
 
 // start application
 start();
