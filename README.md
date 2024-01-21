@@ -89,12 +89,10 @@
 
   ## Acknowledgements
   
-  thank you to Thomas Calle : https://github.com/ThomasCalle
-
-  ZacharyBinx : https://github.com/ZacharyBinx
-
-  and UCF Coding BootCamp Tutor : 
+  thank you to Thomas Calle : https://github.com/ThomasCalle <br>
+  ZacharyBinx : https://github.com/ZacharyBinx <br>
+  and UCF Coding BootCamp Teacher, TAs, Educational Assistants & Tutors
 
   ## Questions
   
-  Contact me at : [BrongoArtDecor@gmail.com](mailto:BrongoArtDecor@gmail.com)
+  contact me at : [BrongoArtDecor@gmail.com](mailto:BrongoArtDecor@gmail.com)
