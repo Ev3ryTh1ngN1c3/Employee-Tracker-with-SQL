@@ -11,7 +11,17 @@ const connection = mysql.createConnection({
     database: "employeeTracker_db",
 });
 
-// Start application
+// connect to the MySQL server
+connection.connect((err) => {
+    if (err) {
+      console.error('error connecting to the database: ', err);
+      return;
+    }
+    console.log('connected to the database');
+  });
+
+
+// start application
 init();
 
 async function init() {
@@ -44,21 +54,21 @@ async function start() {
     const { action } = await inquirer.prompt({
         type: "list",
         name: "action",
-        message: "What would you like to do?",
+        message: "choose from the following",
         choices: [
-            "View all departments",
-            "View all roles",
-            "View all employees",
-            "Add a department",
-            "Add a role",
-            "Add an employee",
-            "Add a Manager",
-            "Update an employee role",
-            "View Employees by Manager",
-            "View Employees by Department",
-            "Delete Departments | Roles | Employees",
-            "View the total utilized budget of a department",
-            "Exit",
+            "view departments",
+            "view roles",
+            "view employees",
+            "add a department",
+            "add a role",
+            "add an employee",
+            "add a Manager",
+            "update a role",
+            "view employees by manager",
+            "view employees by department",
+            "delete departments | roles | employees",
+            "view the total utilized budget of a department",
+            "exit",
         ],
     });
 
@@ -81,19 +91,19 @@ async function start() {
         case "add an employee":
             // code for adding an employee
             break;
-        case "Add a Manager":
+        case "add a manager":
             // code for adding a manager
             break;
         case "update an employee role":
             // code for updating an employee role
             break;
-        case "view Employees by Manager":
+        case "view employees by manager":
             // code for viewing employees by manager
             break;
-        case "view Employees by Department":
+        case "view employees by department":
             // code for viewing employees by department
             break;
-        case "delete Departments | roles | employees":
+        case "delete departments | roles | employees":
             // code for deleting departments, roles, or employees
             break;
         case "view the total utilized budget of a department":
@@ -111,21 +121,21 @@ async function editDepartments() {
     const { department } = await inquirer.prompt({
         name: "department",
         type: "list",
-        message: "Choose one of the following:",
+        message: "choose one of the following:",
         choices: [
-            "Add Department",
-            "Remove Department",
-            "Exit"
+            "add department",
+            "remove department",
+            "exit"
         ]
     });
 
-    if (department === "Add Department") {
+    if (department === "add department") {
         addDepartment();
     }
-    if (department === "Remove Department") {
+    if (department === "remove department") {
         remDepartment();
     }
-    if (department === "Exit") {
+    if (department === "exit") {
         init();
     }
 }
@@ -326,7 +336,7 @@ function updateEmployeeRole() {
     });
 }
 
-// eployees by department
+// employees by department
 function viewEmployeesByDepartment() {
     const query =
         "SELECT departments.department_name, employee.first_name, employee.last_name FROM employee INNER JOIN roles ON employee.role_id = roles.id INNER JOIN departments ON roles.department_id = departments.id ORDER BY departments.department_name ASC";
