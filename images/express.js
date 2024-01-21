@@ -118,5 +118,54 @@ async function start() {
             break;
     }
 }
+// Edit department functions
+async function editDepartments() {
+    const { department } = await inquirer.prompt({
+        name: "department",
+        type: "list",
+        message: "Choose one of the following:",
+        choices: [
+            "Add Department",
+            "Remove Department",
+            "Exit"
+        ]
+    });
 
+    if (department === "Add Department") {
+        addDepartment();
+    }
+    if (department === "Remove Department") {
+        remDepartment();
+    }
+    if (department === "Exit") {
+        init();
+    }
+}
 
+// view all departments
+function viewAllDepartments() {
+    const query = "SELECT * FROM departments";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        // restart the application
+        start();
+    });
+}
+
+// add a department
+async function addDepartment() {
+    const departmentName = await inquirer.prompt({
+        name: "name",
+        type: "input",
+        message: "enter the name of the new department:",
+    });
+
+    const query = `INSERT INTO departments (department_name) VALUES ("${departmentName.name}")`;
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.log(`added department ${departmentName.name} to the database!`);
+        // restart the application
+        start();
+    });
+}
