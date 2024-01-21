@@ -169,3 +169,85 @@ async function addDepartment() {
         start();
     });
 }
+function addRole() {
+    const query = "SELECT * FROM departments";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        inquirer
+            .prompt([
+                {
+                    type: "input",
+                    name: "title",
+                    message: "title of the new role:",
+                },
+                {
+                    type: "input",
+                    name: "salary",
+                    message: "salary of the new role:",
+                },
+                {
+                    type: "list",
+                    name: "department",
+                    message: "department for the new role:",
+                    choices: res.map((department) => department.department_name),
+                },
+            ])
+            .then((answers) => {
+                const department = res.find(
+                    (department) => department.name === answers.department
+                );
+                const query = "INSERT INTO roles SET ?";
+                connection.query(
+                    query,
+                    {
+                        title: answers.title,
+                        salary: answers.salary,
+                        department_id: department,
+                    },
+                    (err, res) => {
+                        if (err) throw err;
+                        console.log(
+                            `added role ${answers.title} with salary ${answers.salary} to the ${answers.department} department in the database!`
+                        );
+                        start();
+                    }
+                );
+            });
+    });
+}
+
+async function addRole() {
+    const departments = await connection.query(
+        "SELECT dept, id FROM department"
+    );
+    console.log(departments);
+    const { dept, title, salary } = await inquirer.prompt([
+        {
+            name: "dept",
+            type: "list",
+            message: "department this role be associated with",
+            choices: departments.map((row) => ({
+                name: row.dept,
+                value: row.id,
+            })),
+        },
+        {
+            name: "title",
+            type: "input",
+            message: "role being created",
+        },
+        {
+            name: "salary",
+            type: "number",
+            message: "salary for this role",
+        },
+    ]);
+    connection.query(
+        `INSERT INTO role (title, salary, dept_id) VALUES ('${title}', ${salary}, ${dept})`,
+        function (err, res) {
+            if (err) throw err;
+            console.log(res.affectedRows + " Role Added\n");
+            init();
+        }
+    );
+}
