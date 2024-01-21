@@ -210,7 +210,7 @@ function addEmployee() {
             value: id,
         }));
 
-        // Retrieve list of employees from the database to use as managers
+        // retrieve list of employees from the database to use as managers
         connection.query(
             'SELECT id, CONCAT(first_name, " ", last_name) AS name FROM employee',
             (error, results) => {
@@ -224,29 +224,29 @@ function addEmployee() {
                     value: id,
                 }));
 
-                // Prompt the user for employee information
+                // prompt the user for employee information
                 inquirer
                     .prompt([
                         {
                             type: "input",
                             name: "firstName",
-                            message: "Enter the employee's first name:",
+                            message: "enter the employee's first name:",
                         },
                         {
                             type: "input",
                             name: "lastName",
-                            message: "Enter the employee's last name:",
+                            message: "enter the employee's last name:",
                         },
                         {
                             type: "list",
                             name: "roleId",
-                            message: "Select the employee role:",
+                            message: "select the employee role:",
                             choices: roles,
                         },
                         {
                             type: "list",
                             name: "managerId",
-                            message: "Select the employee manager:",
+                            message: "select the employee manager:",
                             choices: [
                                 { name: "None", value: null },
                                 ...managers,
@@ -254,7 +254,7 @@ function addEmployee() {
                         },
                     ])
                     .then((answers) => {
-                        // Insert the employee into the database
+                        // insert the employee into the database
                         const sql =
                             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)";
                         const values = [
@@ -341,7 +341,7 @@ function addManager() {
                         (err, res) => {
                             if (err) throw err;
                             console.log(
-                                `Added manager ${manager.first_name} ${manager.last_name} to employee ${employee.first_name} ${employee.last_name} in department ${department.department_name}!`
+                                `add manager ${manager.first_name} ${manager.last_name} to employee ${employee.first_name} ${employee.last_name} in department ${department.department_name}!`
                             );
                             // restart the application
                             start();
@@ -407,8 +407,7 @@ function updateEmployeeRole() {
     });
 }
 
-// Remember: iPad forced push to origin main deleted local stash that fixed bonus question for salary summary
-// Function to View Employee By Manager
+// select employee by manager id
 function viewEmployeesByManager() {
     const query = `
       SELECT 
@@ -444,7 +443,7 @@ function viewEmployeesByManager() {
         }, {});
 
         // display employees by manager
-        console.log("Employees by manager:");
+        console.log("employee by manager:");
         for (const managerName in employeesByManager) {
             console.log(`\n${managerName}:`);
             const employees = employeesByManager[managerName];
@@ -459,47 +458,47 @@ function viewEmployeesByManager() {
         start();
     });
 }
-// Function to view Employees by Department
+// select employees by department
 function viewEmployeesByDepartment() {
     const query =
         "SELECT departments.department_name, employee.first_name, employee.last_name FROM employee INNER JOIN roles ON employee.role_id = roles.id INNER JOIN departments ON roles.department_id = departments.id ORDER BY departments.department_name ASC";
 
     connection.query(query, (err, res) => {
         if (err) throw err;
-        console.log("\nEmployees by department:");
+        console.log("\nemployee by department:");
         console.table(res);
         // restart the application
         start();
     });
 }
-// Function to DELETE Departments Roles Employees
-function deleteDepartmentsRolesEmployees() {
+// DELETE department role employee
+function deleteDepartmentRoleEmployee() {
     inquirer
         .prompt({
             type: "list",
             name: "data",
             message: "What would you like to delete?",
-            choices: ["Employee", "Role", "Department"],
+            choices: ["employee", "role", "department"],
         })
         .then((answer) => {
             switch (answer.data) {
-                case "Employee":
+                case "employee":
                     deleteEmployee();
                     break;
-                case "Role":
+                case "role":
                     deleteRole();
                     break;
-                case "Department":
+                case "department":
                     deleteDepartment();
                     break;
                 default:
-                    console.log(`Invalid data: ${answer.data}`);
+                    console.log(`invalid data: ${answer.data}`);
                     start();
                     break;
             }
         });
 }
-// Function to DELETE Employees
+// DELETE employee
 function deleteEmployee() {
     const query = "SELECT * FROM employee";
     connection.query(query, (err, res) => {
@@ -508,12 +507,12 @@ function deleteEmployee() {
             name: `${employee.first_name} ${employee.last_name}`,
             value: employee.id,
         }));
-        employeeList.push({ name: "Go Back", value: "back" }); // add a "back" option
+        employeeList.push({ name: "Go Back", value: "back" });
         inquirer
             .prompt({
                 type: "list",
                 name: "id",
-                message: "Select the employee you want to delete:",
+                message: "select the employee to delete:",
                 choices: employeeList,
             })
             .then((answer) => {
@@ -522,11 +521,11 @@ function deleteEmployee() {
                     deleteDepartmentsRolesEmployees();
                     return;
                 }
-                const query = "DELETE FROM employee WHERE id = ?";
+                const query = "DELETE employee when id = ?";
                 connection.query(query, [answer.id], (err, res) => {
                     if (err) throw err;
                     console.log(
-                        `Deleted employee with ID ${answer.id} from the database!`
+                        `delete employee with ID ${answer.id} from the database!`
 
                     );
                     // restart the application
@@ -535,28 +534,28 @@ function deleteEmployee() {
             });
     });
 }
-// Function to DELETE ROLE
+// DELETE ROLE
 function deleteRole() {
-    // retrieve all available roles from the database
+    // retrieve all roles from the database
     const query = "SELECT * FROM roles";
     connection.query(query, (err, res) => {
         if (err) throw err;
-        // map through the retrieved roles to create an array of choices
+        // map() method the role choices array & display the options 
         const choices = res.map((role) => ({
             name: `${role.title} (${role.id}) - ${role.salary}`,
             value: role.id,
         }));
-        // add a "Go Back" option to the list of choices
-        choices.push({ name: "Go Back", value: null });
+        // add a "go back" option to the list of choices
+        choices.push({ name: "go back", value: null });
         inquirer
             .prompt({
                 type: "list",
                 name: "roleId",
-                message: "Select the role you want to delete:",
+                message: "select role to delete:",
                 choices: choices,
             })
             .then((answer) => {
-                // check if the user chose the "Go Back" option
+                // user chose "go gack"
                 if (answer.roleId === null) {
                     // go back to the deleteDepartmentsRolesEmployees function
                     deleteDepartmentsRolesEmployees();
@@ -573,7 +572,7 @@ function deleteRole() {
             });
     });
 }
-// Fuction to DELETE Department
+// DELETE Department
 function deleteDepartment() {
     // get the list of departments
     const query = "SELECT * FROM departments";
@@ -589,10 +588,10 @@ function deleteDepartment() {
             .prompt({
                 type: "list",
                 name: "departmentId",
-                message: "Which department do you want to delete?",
+                message: "which department to delete?",
                 choices: [
                     ...departmentChoices,
-                    { name: "Go Back", value: "back" },
+                    { name: "go back", value: "back" },
                 ],
             })
             .then((answer) => {
@@ -600,14 +599,14 @@ function deleteDepartment() {
                     // go back to the previous menu
                     deleteDepartmentsRolesEmployees();
                 } else {
-                    const query = "DELETE FROM departments WHERE id = ?";
+                    const query = "DELETE FROM department WHERE id = ?";
                     connection.query(
                         query,
                         [answer.departmentId],
                         (err, res) => {
                             if (err) throw err;
                             console.log(
-                                `Deleted department with ID ${answer.departmentId} from the database!`
+                                `deleted department with ID ${answer.departmentId} from the database!`
                             );
                             // restart the application
                             start();
@@ -617,7 +616,7 @@ function deleteDepartment() {
             });
     });
 }
-// Function to view Total Utilized Budget of Department
+// view the combined salaries
 function viewTotalUtilizedBudgetOfDepartment() {
     const query = "SELECT * FROM departments";
     connection.query(query, (err, res) => {
@@ -633,7 +632,7 @@ function viewTotalUtilizedBudgetOfDepartment() {
                 type: "list",
                 name: "departmentId",
                 message:
-                    "Which department do you want to calculate the total salary for?",
+                    "department do you want to the total salary for ?",
                 choices: departmentChoices,
             })
             .then((answer) => {
