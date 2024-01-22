@@ -261,6 +261,26 @@ async function addRole() {
         }
     );
 }
+
+const connection = require('./connection');
+
+const viewRoles = () => {
+  const sql = `
+    SELECT role.id, role.title, role.salary, department.name AS department
+    FROM role
+    INNER JOIN department ON role.department_id = department.id
+  `;
+
+  connection.query(sql, (err, rows) => {
+    if (err) throw err;
+
+    console.table(rows);
+    init();
+  });
+};
+
+module.exports = viewRoles;
+
 // edit role
 async function updateRole() {
     const employees = await connection.query(
