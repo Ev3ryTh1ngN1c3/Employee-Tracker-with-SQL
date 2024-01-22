@@ -15,9 +15,9 @@ INSERT INTO role (id, title, salary, department_id) VALUES
 (7, 'Facilities', 70000, 3);
 
 -- insert employees
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES
-(1, 'Leonardo', 'da Vinci', 1, 1),
+(1, 'Leonardo', 'da Vinci', 1, NULL),
 (2, 'Vincent', 'Van Gogh', 2, 1),
 (3, 'Claude', 'Monet', 3, 1),
 (4, 'Jackson', 'Pollock', 4, 2),

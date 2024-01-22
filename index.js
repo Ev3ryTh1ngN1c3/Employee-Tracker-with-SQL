@@ -1,6 +1,18 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql2");
-const questions = require("./assets/js/questions");
+// const questions = require("./assets/js/questions");
+
+// WHEN YOU RECORD YOUR DEMO VIDEO
+// mysql -u root -p
+// source db/schema.sql; (create the database)
+// source db/seeds.sql; (create the data in the database)
+// quit; (leave the sql terminal)
+// npm i (demonstrate installing the packages)
+// node index.js (demonstrate all of the prompts for your app)
+
+// Fix the switch/case to match the choices from inquirer prompt
+// implement the view roles function
+// call the functions in the switch case
 
 // MySQL connection
 const connection = mysql.createConnection({
@@ -8,7 +20,7 @@ const connection = mysql.createConnection({
     port: 3306,
     user: "root",
     password: "ch0sen",
-    database: "employeeTracker_db",
+    database: "tracker_db",
 });
 
 // connect to the MySQL server
@@ -22,30 +34,30 @@ connection.connect((err) => {
 
 
 // start application
-init();
+// init();
 
-async function init() {
-    const { action } = await inquirer.prompt(questions);
-    switch (action) {
-        case "edit department":
-            editDepartments();
-            break;
-        case "edit employee role":
-            editRole();
-            break;
-        case "edit employee":
-            editEmployee();
-            break;
-        case "view information":
-            viewInfo();
-            break;
-        case "exit":
-            process.exit(0);
-            break;
-        default:
-            break;
-    }
-}
+// async function init() {
+//     const { action } = await inquirer.prompt(questions);
+//     switch (action) {
+//         case "edit department":
+//             editDepartments();
+//             break;
+//         case "edit employee role":
+//             editRole();
+//             break;
+//         case "edit employee":
+//             editEmployee();
+//             break;
+//         case "view information":
+//             viewInfo();
+//             break;
+//         case "exit":
+//             process.exit(0);
+//             break;
+//         default:
+//             break;
+//     }
+// }
 
 // start application
 start();
@@ -73,11 +85,11 @@ async function start() {
     });
 
     switch (action) {
-        case "view all departments":
-
+        case "view departments":
+            viewAllDepartments();
             break;
-        case "view all roles":
-
+        case "view roles":
+            // Call the function
             break;
         case "view all employees":
 
@@ -142,7 +154,7 @@ async function editDepartments() {
 
 // view all departments
 function viewAllDepartments() {
-    const query = "SELECT * FROM departments";
+    const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
         if (err) throw err;
         console.table(res);
