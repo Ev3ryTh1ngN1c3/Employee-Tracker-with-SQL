@@ -2,18 +2,6 @@ const inquirer = require("inquirer");
 const mysql = require("mysql2");
 // const questions = require("./assets/js/questions");
 
-// WHEN YOU RECORD YOUR DEMO VIDEO
-// mysql -u root -p
-// source db/schema.sql; (create the database)
-// source db/seeds.sql; (create the data in the database)
-// quit; (leave the sql terminal)
-// npm i (demonstrate installing the packages)
-// node index.js (demonstrate all of the prompts for your app)
-
-// Fix the switch/case to match the choices from inquirer prompt
-// implement the view roles function
-// call the functions in the switch case
-
 // MySQL connection
 const connection = mysql.createConnection({
     host: "localhost",
@@ -32,34 +20,6 @@ connection.connect((err) => {
     console.log('connected to the database');
 });
 
-
-// start application
-// init();
-
-// async function init() {
-//     const { action } = await inquirer.prompt(questions);
-//     switch (action) {
-//         case "edit department":
-//             editDepartments();
-//             break;
-//         case "edit employee role":
-//             editRole();
-//             break;
-//         case "edit employee":
-//             editEmployee();
-//             break;
-//         case "view information":
-//             viewInfo();
-//             break;
-//         case "exit":
-//             process.exit(0);
-//             break;
-//         default:
-//             break;
-//     }
-// }
-
-// start application
 start();
 
 async function start() {
@@ -74,8 +34,8 @@ async function start() {
             "add a department",
             "add a role",
             "add an employee",
-            "add a Manager",
-            "update a role",
+            "add a manager",
+            "update an employee role",
             "view employees by manager",
             "view employees by department",
             "delete departments | roles | employees",
@@ -265,18 +225,18 @@ async function addRole() {
 const connection = require('./connection');
 
 const viewRoles = () => {
-  const sql = `
+    const sql = `
     SELECT role.id, role.title, role.salary, department.name AS department
     FROM role
     INNER JOIN department ON role.department_id = department.id
   `;
 
-  connection.query(sql, (err, rows) => {
-    if (err) throw err;
+    connection.query(sql, (err, rows) => {
+        if (err) throw err;
 
-    console.table(rows);
-    init();
-  });
+        console.table(rows);
+        init();
+    });
 };
 
 module.exports = viewRoles;
