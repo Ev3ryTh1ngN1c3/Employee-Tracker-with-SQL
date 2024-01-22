@@ -87,6 +87,8 @@
 
   ## What Was Learned
 
+  In this project I learned how to create a command-line application that allows users to manage employee information using a MySQL database. This project focuses on various SQL concepts & techniques, including creating & modifying tables, performing CRUD operations (Create, Read, Update, Delete), using joins to retrieve data from multiple tables & implementing basic command-line user interfaces. The project also covers topics such as database schema design, data validation & error handling.
+
   ## Acknowledgements
   
   thank you to Thomas Calle : https://github.com/ThomasCalle <br>
