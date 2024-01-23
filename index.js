@@ -235,6 +235,7 @@ const viewAllRoles = () => {
         if (err) throw err;
 
         console.table(rows);
+        start();
     });
 };
 

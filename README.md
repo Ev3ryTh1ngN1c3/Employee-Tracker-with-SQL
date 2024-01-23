@@ -79,6 +79,8 @@
 
   ## Video Demonstration
 
+  https://drive.google.com/file/d/1otapXyXJC5N0qR2X3bpGrdKEynwAOLP9/view
+
   ## Project Motivation
 
   for business owners <br>
