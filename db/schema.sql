@@ -26,3 +26,8 @@ CREATE TABLE employee (
   FOREIGN KEY (role_id) REFERENCES role(id), 
   FOREIGN KEY (manager_id) REFERENCES employee(id) 
 );
+
+CREATE TABLE departments (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  department_name VARCHAR(30)
+);
