@@ -95,7 +95,8 @@
   
   thank you to Thomas Calle : https://github.com/ThomasCalle <br>
   ZacharyBinx : https://github.com/ZacharyBinx <br>
-  & UCF Coding BootCamp Teacher, TAs, Educational Assistants & Tutors, specifically Juno Nguyen
+  & UCF Coding BootCamp Teacher, TAs, Educational Assistants & Tutors, <br>
+  specifically Juno Nguyen & Gerard Mennella
 
   ## Questions
   
