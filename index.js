@@ -43,6 +43,7 @@ async function start() {
             "exit",
         ],
     });
+}
 
     switch (action) {
         case "view departments":
