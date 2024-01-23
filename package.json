@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/Ev3ryTh1ngN1c3/Employee-Tracker-with-SQL#readme",
   "dependencies": {
-    "inquirer": "^8.2.4"
+    "inquirer": "^8.2.6",
+    "mysql2": "^3.7.1"
   }
 }
