@@ -48,7 +48,7 @@ const start = () => {
             case "view roles":
                 viewAllRoles();
                 break;
-            case "view all employees":
+            case "view employees":
                 viewAllEmployees();
                 break;
             case "add a department":
@@ -139,6 +139,19 @@ async function addDepartment() {
         start();
     });
 }
+// view employees
+function viewAllEmployees() {
+    const query = "SELECT * FROM employee";
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        // restart the application
+        start();
+    });
+}
+
+
+
 function addRole() {
     const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
