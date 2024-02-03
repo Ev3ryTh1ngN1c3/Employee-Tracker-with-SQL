@@ -131,7 +131,7 @@ async function addDepartment() {
         message: "enter the name of the new department:",
     });
 
-    const query = `INSERT INTO departments (department_name) VALUES ("${departmentName.name}")`;
+    const query = `INSERT INTO department (department_name) VALUES ("${departmentName.name}")`;
     connection.query(query, (err, res) => {
         if (err) throw err;
         console.log(`added department ${departmentName.name} to the database!`);
@@ -140,7 +140,7 @@ async function addDepartment() {
     });
 }
 function addRole() {
-    const query = "SELECT * FROM departments";
+    const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
         if (err) throw err;
         inquirer
@@ -166,7 +166,7 @@ function addRole() {
                 const department = res.find(
                     (department) => department.name === answers.department
                 );
-                const query = "INSERT INTO roles SET ?";
+                const query = "INSERT INTO role SET ?";
                 connection.query(
                     query,
                     {
@@ -273,8 +273,8 @@ async function updateRole() {
 // update employee role
 function updateEmployeeRole() {
     const queryEmployees =
-        "SELECT employee.id, employee.first_name, employee.last_name, roles.title FROM employee LEFT JOIN roles ON employee.role_id = roles.id";
-    const queryRoles = "SELECT * FROM roles";
+        "SELECT employee.id, employee.first_name, employee.last_name, role.title FROM employee LEFT JOIN role ON employee.role_id = role.id";
+    const queryRoles = "SELECT * FROM role";
     connection.query(queryEmployees, (err, resEmployees) => {
         if (err) throw err;
         connection.query(queryRoles, (err, resRoles) => {
@@ -327,7 +327,7 @@ function updateEmployeeRole() {
 // employees by department
 function viewEmployeesByDepartment() {
     const query =
-        "SELECT departments.department_name, employee.first_name, employee.last_name FROM employee INNER JOIN roles ON employee.role_id = roles.id INNER JOIN departments ON roles.department_id = departments.id ORDER BY departments.department_name ASC";
+        "SELECT department.department_name, employee.first_name, employee.last_name FROM employee INNER JOIN role ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.id ORDER BY department.department_name ASC";
     connection.query(query, (err, res) => {
         if (err) throw err;
         console.log("\nEmployees by department:");
@@ -393,7 +393,7 @@ async function removeEmployee() {
 
 // view total budget of a department
 function viewTotalUtilizedBudgetOfDepartment() {
-    const query = "SELECT * FROM departments";
+    const query = "SELECT * FROM department";
     connection.query(query, (err, res) => {
         if (err) throw err;
         const departmentChoices = res.map((department) => ({
@@ -413,16 +413,16 @@ function viewTotalUtilizedBudgetOfDepartment() {
                 // calculate the total salary for the selected department
                 const query = `
                     SELECT
-                        departments.department_name AS department,
+                        department.department_name AS department,
                         SUM(roles.salary) AS total_salary
                     FROM
-                        departments
-                        INNER JOIN roles ON departments.id = roles.department_id
-                        INNER JOIN employee ON roles.id = employee.role_id
+                        department
+                        INNER JOIN role ON department.id = role.department_id
+                        INNER JOIN employee ON role.id = employee.role_id
                     WHERE
-                        departments.id = ?
+                        department.id = ?
                     GROUP BY
-                        departments.id;
+                        department.id;
                 `;
                 connection.query(query, [answer.departmentId], (err, res) => {
                     if (err) throw err;
